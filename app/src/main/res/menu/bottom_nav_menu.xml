@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/nav_pedidos"
+            android:icon="@drawable/ic_pedido"
+            android:title="Pedidos" />
+
+    <item
+            android:id="@+id/nav_historial"
+            android:icon="@drawable/ic_lock"
+            android:title="Historial" />
+
+    <item
+            android:id="@+id/nav_clientes"
+            android:icon="@drawable/ic_email"
+            android:title="Clientes" />
+
+    <item
+            android:id="@+id/nav_configuracion"
+            android:icon="@drawable/ic_email"
+            android:title="Configuración" />
+
+</menu>
