@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:padding="16dp">
+
+    <TextView
+            android:id="@+id/txtCliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cliente: Nombre"
+            android:textStyle="bold"/>
+
+    <TextView
+            android:id="@+id/txtDireccion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dirección: Dirección del cliente"/>
+
+    <TextView
+            android:id="@+id/txtDescripcion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descripción: Detalles del pedido"/>
+
+    <TextView
+            android:id="@+id/txtMonto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Monto: $0.00"/>
+
+    <TextView
+            android:id="@+id/txtActivo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Activo: Sí"/>
+</LinearLayout>
