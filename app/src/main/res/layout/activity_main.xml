@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorBackground"
+        android:background="@color/background_color"
         tools:context=".MainActivity">
 
     <!-- Logo de pedidos con tamaño reducido -->
@@ -46,7 +46,8 @@
             app:cardElevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle">
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            android:backgroundTint="@color/card_background">
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -78,7 +79,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Email"
-                        android:inputType="textEmailAddress" />
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/text_primary" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Campo de entrada para Contraseña con icono y toggle para mostrar/ocultar -->
@@ -95,7 +97,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Contraseña"
-                        android:inputType="textPassword" />
+                        android:inputType="textPassword"
+                        android:textColor="@color/text_primary" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Botón para iniciar sesión -->
@@ -107,18 +110,11 @@
                     android:paddingBottom="10dp"
                     android:text="Iniciar Sesión"
                     android:textAllCaps="false"
-                    app:cornerRadius="8dp" />
+                    app:cornerRadius="8dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:textColor="@color/text_on_primary" />
 
             <!-- Opción para olvidé mi contraseña -->
-            <TextView
-                    android:id="@+id/tvForgotPassword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="16dp"
-                    android:text="¿Olvidaste tu contraseña?"
-                    android:textColor="#DD2C00"
-                    android:textSize="14sp"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

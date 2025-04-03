@@ -1,37 +1,62 @@
 package com.example.pedidos
 
+import Pedido
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuInflater
+import android.view.View
+import android.widget.ImageButton
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.appcompat.widget.PopupMenu
+import com.google.android.material.button.MaterialButton
 
 class Home : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        val btnNuevoPedido = findViewById<MaterialButton>(R.id.btnNuevoPedido)
+        val btnMas = findViewById<ImageButton>(R.id.btnMas)
 
-        bottomNavigationView.setOnItemSelectedListener { item ->
+        btnNuevoPedido.setOnClickListener {
+            startActivity(Intent(this, pedidos::class.java))
+        }
+
+        btnMas.setOnClickListener { view ->
+            showPopupMenu(view)
+        }
+    }
+
+    private fun showPopupMenu(view: View) {
+        val popup = PopupMenu(this, view)
+        val inflater: MenuInflater = popup.menuInflater
+        inflater.inflate(R.menu.bottom_nav_menu, popup.menu)
+
+        popup.setOnMenuItemClickListener { item ->
             when (item.itemId) {
-                R.id.nav_pedidos -> {
-                    startActivity(Intent(this, pedidos::class.java))
+                R.id.action_settings -> {
+                    // Navegar a Configuración
+                    startActivity(Intent(this, configuracion::class.java))
                     true
                 }
-                R.id.nav_historial -> {
-                    startActivity(Intent(this, historial::class.java))
-                    true
-                }
-                R.id.nav_clientes -> {
-                    startActivity(Intent(this, clientes::class.java))
-                    true
-                }
-                R.id.nav_configuracion -> {
-                    startActivity(Intent(this, clientes::class.java))
+                R.id.action_about -> {
+                    // Mostrar diálogo Acerca de
+                    showAboutDialog()
                     true
                 }
                 else -> false
             }
         }
+        popup.show()
+    }
+
+    private fun showAboutDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Acerca de")
+            .setMessage("Versión 1.0\nDesarrollado por Mi Empresa")
+            .setPositiveButton("Aceptar", null)
+            .show()
     }
 }

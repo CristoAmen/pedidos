@@ -5,61 +5,163 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".configuracion">
+        android:background="@color/background_color"
+        tools:context=".Configuracion">
 
-    <!-- Gráficos de estadísticas -->
-    <androidx.cardview.widget.CardView
-            android:id="@+id/cardEstadisticas"
+    <!-- Barra superior con título -->
+    <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_margin="16dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/colorPrimary"
+                android:elevation="4dp">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Configuración"
+                    android:textColor="@color/text_on_primary"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Tarjeta de perfil del usuario -->
+    <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardViewPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
             app:cardCornerRadius="12dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:cardElevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:elevation="4dp">
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Estadísticas de Pedidos"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_margin="16dp"
-                android:layout_gravity="center"/>
-
-    </androidx.cardview.widget.CardView>
-
-    <!-- Total de ventas -->
-    <TextView
-            android:id="@+id/txtTotalVentas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Total de ventas: $0.00"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_margin="16dp"
-            app:layout_constraintTop_toBottomOf="@id/cardEstadisticas"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-    <!-- RecyclerView para pedidos en proceso -->
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerPedidosProceso"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="16dp"
-            app:layout_constraintTop_toBottomOf="@id/txtTotalVentas"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-    <!-- Menú de navegación -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigation"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:menu="@menu/bottom_nav_menu"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/appBarLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+            <ImageView
+                    android:id="@+id/ivPerfil"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@color/divider_color"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/furi"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="Foto de perfil" />
+
+            <TextView
+                    android:id="@+id/tvNombreUsuario"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Nombre de Usuario"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ivPerfil"
+                    app:layout_constraintTop_toTopOf="@id/ivPerfil" />
+
+            <TextView
+                    android:id="@+id/tvCorreoElectronico"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="usuario@example.com"
+                    android:textColor="@color/text_secondary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tvNombreUsuario"
+                    app:layout_constraintTop_toBottomOf="@id/tvNombreUsuario" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Sección de opciones de configuración -->
+    <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardViewOpciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardViewPerfil">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <!-- Opción de actualizar datos -->
+            <LinearLayout
+                    android:id="@+id/layoutActualizarDatos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_edit"
+                        android:tint="@color/colorPrimary"
+                        android:contentDescription="Icono actualizar datos" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="16dp"
+                        android:text="Actualizar datos"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_primary" />
+            </LinearLayout>
+
+            <!-- Línea divisoria -->
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/divider_color" />
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Botón de cerrar sesión -->
+    <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCerrarSesion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/error_color"
+            android:padding="12dp"
+            android:text="Cerrar sesión"
+            android:textAllCaps="false"
+            android:textColor="@color/text_on_primary"
+            app:cornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardViewOpciones" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

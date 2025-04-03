@@ -12,4 +12,31 @@
     <color name="colorPrimaryDark">#1565C0</color>     <!-- Azul más oscuro para la barra de estado -->
     <color name="colorAccent">#FFA000</color>          <!-- Color de acento/secundario (ámbar) -->
     <color name="colorBackground">#FAFAFA</color>      <!-- Fondo claro -->
+
+    <!-- Colores principales -->
+    <color name="primary_color">#1976D2</color>         <!-- Azul principal -->
+    <color name="primary_dark_color">#0D47A1</color>    <!-- Variante oscura para statusbar -->
+    <color name="primary_light_color">#BBDEFB</color>   <!-- Variante clara para fondos sutiles -->
+
+    <!-- Colores de acento -->
+    <color name="accent_color">#FF5722</color>          <!-- Naranja para llamar la atención -->
+    <color name="accent_dark_color">#E64A19</color>     <!-- Variante oscura del acento -->
+
+    <!-- Colores para estados -->
+    <color name="success_color">#4CAF50</color>         <!-- Verde para éxito -->
+    <color name="warning_color">#FFC107</color>         <!-- Amarillo para advertencias -->
+    <color name="error_color">#F44336</color>           <!-- Rojo para errores -->
+
+    <!-- Colores neutrales -->
+    <color name="background_color">#F5F5F5</color>      <!-- Gris muy claro para fondo general -->
+    <color name="card_background">#FFFFFF</color>       <!-- Blanco para tarjetas -->
+    <color name="divider_color">#E0E0E0</color>         <!-- Gris claro para divisores -->
+
+    <!-- Colores de texto -->
+    <color name="text_primary">#212121</color>          <!-- Casi negro para texto principal -->
+    <color name="text_secondary">#757575</color>        <!-- Gris para texto secundario -->
+    <color name="text_disabled">#9E9E9E</color>         <!-- Gris claro para texto deshabilitado -->
+    <color name="text_on_primary">#FFFFFF</color>       <!-- Blanco para texto sobre color primario -->
+
+
 </resources>

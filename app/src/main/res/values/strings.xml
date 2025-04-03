@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">pedidos</string>
     <string name="logo_del_supermercado">Logo del supermercado</string>
+    <string name="cliente_formato">Cliente: %s</string>
+    <string name="direccion_formato">Dirección: %s</string>
+    <string name="descripcion_formato">Descripción: %s</string>
+    <string name="monto_formato">Monto: %s</string>
+    <string name="activo_formato">Activo: %s</string>
+    <string name="si">Sí</string>
+    <string name="no">No</string>
+    <string name="no_disponible">N/D</string>
 </resources>
