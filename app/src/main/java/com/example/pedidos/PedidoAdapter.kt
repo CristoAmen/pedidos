@@ -10,7 +10,9 @@ import com.google.android.material.button.MaterialButton
 
 class PedidoAdapter(
     private val listaPedidos: MutableList<Pedido>,
-    private val onClick: (Pedido, Int) -> Unit
+    private val onClick: (Pedido, Int) -> Unit,
+    private val onEdit: (Pedido, Int) -> Unit,
+    private val onCancel: (Pedido, Int) -> Unit
 ) : RecyclerView.Adapter<PedidoAdapter.PedidoViewHolder>() {
 
     inner class PedidoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -18,7 +20,9 @@ class PedidoAdapter(
         val txtDescripcion: TextView = itemView.findViewById(R.id.txtDescripcion)
         val txtDireccion: TextView = itemView.findViewById(R.id.txtDireccion)
         val txtMonto: TextView = itemView.findViewById(R.id.txtMonto)
-        // Agrega otros botones o vistas si es necesario.
+        // Referencias a los botones de acción
+        val btnEditar: MaterialButton = itemView.findViewById(R.id.btnEditar)
+        val btnCancelar: MaterialButton = itemView.findViewById(R.id.btnCancelar)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PedidoViewHolder {
@@ -28,13 +32,24 @@ class PedidoAdapter(
 
     override fun onBindViewHolder(holder: PedidoViewHolder, position: Int) {
         val pedido = listaPedidos[position]
-        holder.txtCliente.text = "Cliente: ${pedido.nombreCliente}"
-        holder.txtDescripcion.text = "Descripción: ${pedido.descripcion}"
-        holder.txtDireccion.text = "Dirección: ${pedido.direccion}"
-        holder.txtMonto.text = "Monto: $${pedido.monto}"
+        holder.txtCliente.text = pedido.nombreCliente
+        holder.txtDescripcion.text = pedido.descripcion
+        holder.txtDireccion.text = pedido.direccion
+        holder.txtMonto.text = "$${pedido.monto}"
 
+        // Listener para el item completo (por ejemplo, para ver detalles)
         holder.itemView.setOnClickListener {
             onClick(pedido, position)
+        }
+
+        // Listener para editar el pedido
+        holder.btnEditar.setOnClickListener {
+            onEdit(pedido, position)
+        }
+
+        // Listener para cancelar el pedido
+        holder.btnCancelar.setOnClickListener {
+            onCancel(pedido, position)
         }
     }
 

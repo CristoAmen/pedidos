@@ -1,6 +1,7 @@
 package com.example.pedidos
 
 import Pedido
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -167,7 +168,12 @@ class pedidos : AppCompatActivity() {
         pedidoRef.setValue(pedido)
             .addOnSuccessListener {
                 mostrarExito("Pedido #${pedido.folio} guardado")
-                limpiarFormulario()
+
+                // Ir a Home y cerrar esta actividad
+                val intent = Intent(this, Home::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                finish() // Cierra la actividad actual
             }
             .addOnFailureListener { e ->
                 mostrarError("Error al guardar: ${e.message}")

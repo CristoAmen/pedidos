@@ -118,7 +118,7 @@
                                     android:id="@+id/tvPedidosCount"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="12"
+                                    android:text="-"
                                     android:textSize="24sp"
                                     android:textStyle="bold"
                                     android:textColor="@color/primary_color" />
@@ -140,7 +140,7 @@
                                     android:id="@+id/tvVentasCount"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="$1,250"
+                                    android:text="-"
                                     android:textSize="24sp"
                                     android:textStyle="bold"
                                     android:textColor="@color/accent_color" />
@@ -149,28 +149,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Monto" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical"
-                                android:gravity="center">
-
-                            <TextView
-                                    android:id="@+id/tvPendientesCount"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="5"
-                                    android:textSize="24sp"
-                                    android:textStyle="bold"
-                                    android:textColor="@color/warning_color" />
-
-                            <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Pendientes" />
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>

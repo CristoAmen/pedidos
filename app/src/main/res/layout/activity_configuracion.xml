@@ -102,49 +102,9 @@
             app:cardElevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardViewPerfil">
+            app:layout_constraintTop_toBottomOf="@id/cardViewPerfil"/>
 
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
 
-            <!-- Opción de actualizar datos -->
-            <LinearLayout
-                    android:id="@+id/layoutActualizarDatos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:orientation="horizontal"
-                    android:padding="16dp">
-
-                <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@android:drawable/ic_menu_edit"
-                        android:tint="@color/colorPrimary"
-                        android:contentDescription="Icono actualizar datos" />
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="16dp"
-                        android:text="Actualizar datos"
-                        android:textSize="16sp"
-                        android:textColor="@color/text_primary" />
-            </LinearLayout>
-
-            <!-- Línea divisoria -->
-            <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/divider_color" />
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
 
     <!-- Botón de cerrar sesión -->
     <com.google.android.material.button.MaterialButton

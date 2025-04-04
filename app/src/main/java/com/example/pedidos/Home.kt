@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuInflater
 import android.view.View
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
@@ -25,7 +26,6 @@ class Home : AppCompatActivity() {
 
     private lateinit var tvPedidosCount: TextView
     private lateinit var tvVentasCount: TextView
-    private lateinit var tvPendientesCount: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,14 +37,20 @@ class Home : AppCompatActivity() {
 
         tvPedidosCount = findViewById(R.id.tvPedidosCount)
         tvVentasCount = findViewById(R.id.tvVentasCount)
-        tvPendientesCount = findViewById(R.id.tvPendientesCount)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        // Se pasa la función lambda para manejar el clic en cada pedido.
-        pedidoAdapter = PedidoAdapter(listaPedidos) { pedido, position ->
-            // Manejo de clic: muestra un Toast con el nombre del cliente.
-            Toast.makeText(this, "Pedido de: ${pedido.nombreCliente}", Toast.LENGTH_SHORT).show()
-        }
+        pedidoAdapter = PedidoAdapter(
+            listaPedidos,
+            onClick = { pedido, position ->
+                Toast.makeText(this, "Pedido de: ${pedido.nombreCliente}", Toast.LENGTH_SHORT).show()
+            },
+            onEdit = { pedido, position ->
+                editarPedido(pedido, position)
+            },
+            onCancel = { pedido, position ->
+                cancelarPedido(pedido, position)
+            }
+        )
         recyclerView.adapter = pedidoAdapter
 
         cargarPedidosDesdeFirebase()
@@ -72,13 +78,10 @@ class Home : AppCompatActivity() {
 
                         try {
                             val pedido = pedidoSnapshot.getValue(Pedido::class.java)
-
-                            // Verificar si el pedido es válido antes de agregarlo a la lista
                             if (pedido != null && pedido.activo && pedido.nombreCliente.isNotBlank()) {
                                 listaPedidos.add(pedido)
                             }
                         } catch (e: IllegalArgumentException) {
-                            // Ignorar pedidos con datos inválidos
                             e.printStackTrace()
                         }
                     }
@@ -88,7 +91,7 @@ class Home : AppCompatActivity() {
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    // Manejar error de lectura
+                    // Manejar error
                 }
             })
     }
@@ -96,11 +99,71 @@ class Home : AppCompatActivity() {
     private fun actualizarResumen() {
         val totalPedidos = listaPedidos.size
         val totalVentas = listaPedidos.sumByDouble { it.monto }
-        val totalPendientes = listaPedidos.count { !it.activo }
 
         tvPedidosCount.text = totalPedidos.toString()
         tvVentasCount.text = "$$totalVentas"
-        tvPendientesCount.text = totalPendientes.toString()
+    }
+
+    private fun cancelarPedido(pedido: Pedido, position: Int) {
+        pedido.activo = false
+
+        val database = FirebaseDatabase.getInstance().reference
+        val usuarioId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+
+        database.child("pedidos")
+            .child(usuarioId)
+            .child("pedidos")
+            .child(pedido.folio)
+            .setValue(pedido)
+            .addOnSuccessListener {
+                recreate()
+                Toast.makeText(this, "Pedido cancelado", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Error al cancelar el pedido", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun editarPedido(pedido: Pedido, position: Int) {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_edit_pedido, null)
+
+        val txtNombre = dialogView.findViewById<TextView>(R.id.txtNombre)
+        val etDescripcion = dialogView.findViewById<EditText>(R.id.etDescripcion)
+        val etDireccion = dialogView.findViewById<EditText>(R.id.etDireccion)
+        val etMonto = dialogView.findViewById<EditText>(R.id.etMonto)
+
+        txtNombre.text = pedido.nombreCliente
+        etDescripcion.setText(pedido.descripcion)
+        etDireccion.setText(pedido.direccion)
+        etMonto.setText(pedido.monto.toString())
+
+        val builder = AlertDialog.Builder(this)
+            .setTitle("Editar Pedido")
+            .setView(dialogView)
+            .setPositiveButton("Guardar") { _, _ ->
+                pedido.descripcion = etDescripcion.text.toString()
+                pedido.direccion = etDireccion.text.toString()
+                pedido.monto = etMonto.text.toString().toDoubleOrNull() ?: pedido.monto
+
+                val database = FirebaseDatabase.getInstance().reference
+                val usuarioId = FirebaseAuth.getInstance().currentUser?.uid ?: return@setPositiveButton
+
+                database.child("pedidos")
+                    .child(usuarioId)
+                    .child("pedidos")
+                    .child(pedido.folio)
+                    .setValue(pedido)
+                    .addOnSuccessListener {
+                        pedidoAdapter.notifyItemChanged(position)
+                        actualizarResumen()
+                        Toast.makeText(this, "Pedido actualizado", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(this, "Error al actualizar el pedido", Toast.LENGTH_SHORT).show()
+                    }
+            }
+            .setNegativeButton("Cancelar", null)
+        builder.show()
     }
 
     private fun showPopupMenu(view: View) {
