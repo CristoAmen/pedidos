@@ -24,7 +24,6 @@ class pedidos : AppCompatActivity() {
         // Deshabilitar el campo para que no se pueda editar
         binding.etNombreCliente.isEnabled = false
 
-        // Configurar Firebase y cargar información
         configurarFirebase()
         cargarNombreUsuario()
         configurarBotones()

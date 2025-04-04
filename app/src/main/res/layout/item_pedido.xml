@@ -1,38 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:padding="16dp">
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="wrap_content"
+                                                   android:layout_margin="8dp"
+                                                   app:cardCornerRadius="12dp"
+                                                   app:cardElevation="3dp"
+                                                   app:strokeWidth="1dp"
+                                                   app:strokeColor="#E0E0E0">
 
-    <TextView
-            android:id="@+id/txtCliente"
-            android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cliente: Nombre"
-            android:textStyle="bold"/>
+            android:padding="16dp">
 
-    <TextView
-            android:id="@+id/txtDireccion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dirección: Dirección del cliente"/>
+        <!-- Encabezado con nombre del cliente -->
+        <TextView
+                android:id="@+id/lblCliente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="14sp"
+                android:textColor="#757575"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-            android:id="@+id/txtDescripcion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Descripción: Detalles del pedido"/>
+        <TextView
+                android:id="@+id/txtCliente"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Nombre del cliente"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#212121"
+                app:layout_constraintStart_toEndOf="@id/lblCliente"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/lblCliente" />
 
-    <TextView
-            android:id="@+id/txtMonto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Monto: $0.00"/>
+        <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E0E0E0"
+                android:layout_marginTop="12dp"
+                app:layout_constraintTop_toBottomOf="@id/txtCliente" />
 
-    <TextView
-            android:id="@+id/txtActivo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Activo: Sí"/>
-</LinearLayout>
+        <!-- Sección de detalles -->
+        <ImageView
+                android:id="@+id/iconDescripcion"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@android:drawable/ic_menu_info_details"
+                android:layout_marginTop="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider" app:tint="#5C6BC0"/>
+
+        <TextView
+                android:id="@+id/lblDescripcion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Descripción:"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#424242"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toEndOf="@id/iconDescripcion"
+                app:layout_constraintTop_toTopOf="@id/iconDescripcion" />
+
+        <TextView
+                android:id="@+id/txtDescripcion"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Descripción del servicio o pedido del cliente"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toStartOf="@id/lblDescripcion"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lblDescripcion" />
+
+        <ImageView
+                android:id="@+id/iconDireccion"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@android:drawable/ic_menu_mylocation"
+                android:layout_marginTop="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtDescripcion" app:tint="#5C6BC0"/>
+
+        <TextView
+                android:id="@+id/lblDireccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dirección:"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#424242"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toEndOf="@id/iconDireccion"
+                app:layout_constraintTop_toTopOf="@id/iconDireccion" />
+
+        <TextView
+                android:id="@+id/txtDireccion"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Calle Principal #123, Colonia Centro"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toStartOf="@id/lblDireccion"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lblDireccion" />
+
+        <!-- Borde inferior con monto destacado -->
+        <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E0E0E0"
+                android:layout_marginTop="12dp"
+                app:layout_constraintTop_toBottomOf="@id/txtDireccion" />
+
+        <ImageView
+                android:id="@+id/iconMonto"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@android:drawable/ic_menu_recent_history"
+                android:layout_marginTop="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider2" app:tint="#43A047"/>
+
+        <TextView
+                android:id="@+id/lblMonto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Monto:"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#424242"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toEndOf="@id/iconMonto"
+                app:layout_constraintTop_toTopOf="@id/iconMonto" />
+
+        <TextView
+                android:id="@+id/txtMonto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$1,500.00"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#43A047"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toEndOf="@id/lblMonto"
+                app:layout_constraintTop_toTopOf="@id/lblMonto"
+                app:layout_constraintBottom_toBottomOf="@id/lblMonto" />
+
+        <!-- Botones de acción opcionales -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:gravity="end"
+                app:layout_constraintTop_toBottomOf="@id/txtMonto"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnEditar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Editar"
+                    android:textAllCaps="false"
+                    android:textColor="#5C6BC0"
+                    app:cornerRadius="8dp"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"/>
+
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnEliminar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cancelar"
+                    android:textAllCaps="false"
+                    app:cornerRadius="8dp"
+                    android:layout_marginStart="8dp"
+                    style="@style/Widget.MaterialComponents.Button"/>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

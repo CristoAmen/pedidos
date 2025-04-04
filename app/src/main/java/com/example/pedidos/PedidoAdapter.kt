@@ -6,15 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButton
 
-class PedidoAdapter(private val pedidos: List<Pedido>) : RecyclerView.Adapter<PedidoAdapter.PedidoViewHolder>() {
+class PedidoAdapter(
+    private val listaPedidos: MutableList<Pedido>,
+    private val onClick: (Pedido, Int) -> Unit
+) : RecyclerView.Adapter<PedidoAdapter.PedidoViewHolder>() {
 
-    class PedidoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val clienteTextView: TextView = view.findViewById(R.id.txtCliente)
-        val direccionTextView: TextView = view.findViewById(R.id.txtDireccion)
-        val descripcionTextView: TextView = view.findViewById(R.id.txtDescripcion)
-        val montoTextView: TextView = view.findViewById(R.id.txtMonto)
-        val activoTextView: TextView = view.findViewById(R.id.txtActivo)
+    inner class PedidoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val txtCliente: TextView = itemView.findViewById(R.id.txtCliente)
+        val txtDescripcion: TextView = itemView.findViewById(R.id.txtDescripcion)
+        val txtDireccion: TextView = itemView.findViewById(R.id.txtDireccion)
+        val txtMonto: TextView = itemView.findViewById(R.id.txtMonto)
+        // Agrega otros botones o vistas si es necesario.
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PedidoViewHolder {
@@ -23,13 +27,16 @@ class PedidoAdapter(private val pedidos: List<Pedido>) : RecyclerView.Adapter<Pe
     }
 
     override fun onBindViewHolder(holder: PedidoViewHolder, position: Int) {
-        val pedido = pedidos[position]
-        holder.clienteTextView.text = "Cliente: ${pedido.nombreCliente}"
-        holder.direccionTextView.text = "Dirección: ${pedido.direccion}"
-        holder.descripcionTextView.text = "Descripción: ${pedido.descripcion}"
-        holder.montoTextView.text = "Monto: $${pedido.monto}"
-        holder.activoTextView.text = "Activo: ${if (pedido.activo) "Sí" else "No"}"
+        val pedido = listaPedidos[position]
+        holder.txtCliente.text = "Cliente: ${pedido.nombreCliente}"
+        holder.txtDescripcion.text = "Descripción: ${pedido.descripcion}"
+        holder.txtDireccion.text = "Dirección: ${pedido.direccion}"
+        holder.txtMonto.text = "Monto: $${pedido.monto}"
+
+        holder.itemView.setOnClickListener {
+            onClick(pedido, position)
+        }
     }
 
-    override fun getItemCount() = pedidos.size
+    override fun getItemCount(): Int = listaPedidos.size
 }
